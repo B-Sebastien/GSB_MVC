@@ -9,6 +9,8 @@ switch($action){
 		break;
 	}
 	case 'valideConnexion':{
+            
+            //test commit
 		$login = $_REQUEST['login'];
 		$mdp = $_REQUEST['mdp'];
 		$comptable = $pdo->getInfosComptable($login,$mdp); /*création d'un variable comptable*/
