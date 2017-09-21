@@ -1,4 +1,5 @@
-<?php
+<?php 
+//page connexion
 if(!isset($_REQUEST['action'])){ 
 	$_REQUEST['action'] = 'demandeConnexion'; 
 }
@@ -9,6 +10,8 @@ switch($action){
 		break;
 	}
 	case 'valideConnexion':{
+            
+            //test commit
 		$login = $_REQUEST['login'];
 		$mdp = $_REQUEST['mdp'];
 		$comptable = $pdo->getInfosComptable($login,$mdp); /*création d'un variable comptable*/
@@ -35,7 +38,6 @@ switch($action){
 			}
 		
 		break;
-                //bla
         }
         case'deconnexion':{
             deconnecter();

@@ -1,5 +1,6 @@
 ﻿<?php
 /** 
+ * Page PDO
  * Classe d'accès aux données. 
  
  * Utilise les services de la classe PDO
@@ -60,7 +61,6 @@ class PdoGsb{
 		$ligne = $rs->fetch();
 		return $ligne;
 	}
-        
         
 /**
  * Retourne les informations d'un comptable
