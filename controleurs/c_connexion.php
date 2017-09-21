@@ -35,6 +35,7 @@ switch($action){
 			}
 		
 		break;
+                //bla
         }
         case'deconnexion':{
             deconnecter();

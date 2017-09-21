@@ -61,6 +61,7 @@ class PdoGsb{
 		return $ligne;
 	}
         
+        
 /**
  * Retourne les informations d'un comptable
  
