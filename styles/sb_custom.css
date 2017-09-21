@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css?family=Fjalla+One');	
+
+body {
+    background-color: #0b2a9e;
+}
+
+#entete {
+    background: #2147d1;
+}
+
+#entete h1 {
+    font-family: 'Arial', sans-serif;
+    color: #ffffff;
+    font-size: 2em;
+    padding-top: 3%;
+}
+
+table.listeLegere {
+    width: 100%;
+}
+
+table.listeLegere th.libelle {
+    width: 10%;
+}
+
+table.listeLegere th.montant {
+    width: 15%;
+}
+
+#contenu {
+    border-left: groove 0.8em #2147d1;
+}
+
+#contenu h2 {
+    color: #051b6d;
+}
+
+#page {
+    background-color: white;
+    width: 80%;
+    margin: auto;
+    border: 0.2em solid black;
+    padding: 0.1em;
+    min-height: 340px;
+}
+
+.corpsForm {
+    padding-left: 20px;
+}
+
+#contenu a {
+    font-size: 15px;
+    text-decoration: none;
+    color: #0b2a9e;
+    margin: 5px;
+
+}
+
+#contenu a:hover {
+    font-size: 15px;
+    text-decoration: none;
+    color: #0b2a9e;
+    background-color:none;
+}
+
+#contenu table {
+    width: 98%;
+}
+
+.container-bloc {
+    width: 41%;
+    border: 1px solid black;
+    padding: 10px;
+}
+
+form {
+    background: white;
+    color: black;
+}
+
+.piedForm {
+    border: none;
+width: 45%;
+text-align: center;
+}
+
+#txtLibelleHF, #txtDateHF, #txtMontantHF {
+    width: 60%;
+}
+
+#contenu h3 {
+    width: 205px;
+}
+
+label {
+    width: 128px;
+}
