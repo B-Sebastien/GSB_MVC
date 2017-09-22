@@ -1,52 +1,56 @@
-<?php 
-//page connexion
-if(!isset($_REQUEST['action'])){ 
-	$_REQUEST['action'] = 'demandeConnexion'; 
+<?php
+if (!isset($_REQUEST['action'])) { /* 'action' vient de v_connexion et est égale à 'valideconnexion' | On vérifie simplement si la variable action est vide ou pas */
+    $_REQUEST['action'] = 'demandeConnexion'; /* Si action n'existe pas */
 }
-$action = $_REQUEST['action'];
-switch($action){
-	case 'demandeConnexion':{
-		include("vues/v_connexion.php");
-		break;
-	}
-	case 'valideConnexion':{
-            
-            //test commit
-		$login = $_REQUEST['login'];
-		$mdp = $_REQUEST['mdp'];
-		$comptable = $pdo->getInfosComptable($login,$mdp); /*création d'un variable comptable*/
-		$visiteur = $pdo->getInfosVisiteur($login,$mdp);
-		
-		if ( ! is_array($comptable) && ! is_array($visiteur)){ /* si les infos de visiteur ou comptable ne sont pas des tableaux*/
-			ajouterErreur("Login ou mot de passe incorrect !");
-			include("vues/v_erreurs.php");
-			include("vues/v_connexion.php");
-		}
-		else if (is_array($visiteur)){
-			$id = $visiteur['id'];
-			$nom =  $visiteur['nom'];
-			$prenom = $visiteur['prenom'];
-			connecter($id,$nom,$prenom);
-			include("vues/v_sommaire.php");
-		}
-			else{
-			$id = $comptable['id'];
-			$nom =  $comptable['nom'];
-			$prenom = $comptable['prenom'];
-			connecter($id,$nom,$prenom);
-			include("vues/v_sommaire.php");
-			}
-		
-		break;
+$action = $_REQUEST['action']; /* Transforme la variable action afin de la tester */
+
+switch ($action) {
+    case 'demandeConnexion': {
+            include("vues/v_connexion.php");
+            break;
         }
-        case'deconnexion':{
+    case 'valideConnexion': {
+
+            $login = $_REQUEST['login'];
+            $mdp = $_REQUEST['mdp'];
+            //Si ne fonctionne pas avec sha1 : $mdp = md5($mdp);
+            $comptable = $pdo->getInfosComptable($login, $mdp); /* Création d'une variable comptable */
+            $visiteur = $pdo->getInfosVisiteur($login, $mdp);
+
+            if (!is_array($comptable) && !is_array($visiteur)) { /* Vérifie si les infos d'un visiteur ou d'un comptable ne sont pas des tableaux */
+                ajouterErreur("Login ou mot de passe incorrect !");
+                include("vues/v_erreurs.php");
+                include("vues/v_connexion.php");
+            } 
+            else if (is_array($visiteur)) {
+                $type = "visiteur"; //Ajout d'un type pour différencier un visiteur d'un comptable
+                $id = $visiteur['id'];
+                $nom = $visiteur['nom'];
+                $prenom = $visiteur['prenom'];
+                connecter($id, $nom, $prenom, $type);
+                include("vues/v_sommaire.php");
+            } 
+            else {
+                $type = "comptable"; //Ajout d'un type pour différencier un visiteur d'un comptable
+                $id = $comptable['id'];
+                $nom = $comptable['nom'];
+                $prenom = $comptable['prenom'];
+                connecter($id, $nom, $prenom, $type);
+                include("vues/v_sommaire.php");
+            }
+
+            break;
+        }
+        
+    case'deconnexion': {
             deconnecter();
             include("vues/v_connexion.php");
-		break;
-	}
-	default :{
-		include("vues/v_connexion.php");
-		break;
-	}
+            break;
+        }
+        
+    default : {
+            include("vues/v_connexion.php");
+            break;
+        }
 }
 ?>
