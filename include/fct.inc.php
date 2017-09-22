@@ -20,10 +20,11 @@ function estConnecte(){
  * @param $nom
  * @param $prenom
  */
-function connecter($id,$nom,$prenom){
+function connecter($id,$nom,$prenom, $type){
 	$_SESSION['idVisiteur']= $id; 
 	$_SESSION['nom']= $nom;
 	$_SESSION['prenom']= $prenom;
+        $_SESSION['type']= $type; //Ajout d'un type pour différencier un visiteur d'un comptable
 }
 /**
  * Détruit la session active
