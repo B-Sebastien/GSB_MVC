@@ -13,7 +13,7 @@ switch ($action) {
 
             $login = $_REQUEST['login'];
             $mdp = $_REQUEST['mdp'];
-            //Si ne fonctionne pas avec sha1 : $mdp = md5($mdp);
+            //$mdp = md5($mdp);
             $comptable = $pdo->getInfosComptable($login, $mdp); /* Création d'une variable comptable */
             $visiteur = $pdo->getInfosVisiteur($login, $mdp);
 

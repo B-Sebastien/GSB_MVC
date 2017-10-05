@@ -13,7 +13,7 @@ switch ($action) {
              */
             //array_filter($lesMois);
             var_dump($lesMois);
-            if (empty($lesMois)) {
+            if (empty($lesMois)) { /* Permet d'afficher un message d'erreurs si aucun fiche n'est à valider */
                 ajouterErreur("Pas de fiche frais a valider !");
                 include("vues/v_erreurs.php");
             } else {
@@ -25,7 +25,7 @@ switch ($action) {
         }
     case 'fraisAValider': { 
             $leMois = $_REQUEST['lstMois'];
-            $lesMois = $pdo->getLesMoisAValider();
+            $lesMois = $pdo->getLesMoisAValider(); //Appel fonction
             $moisASelectionner = $leMois;
 
             $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($valeur, $leMois);
