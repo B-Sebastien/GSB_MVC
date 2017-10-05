@@ -12,6 +12,7 @@ switch ($action) {
              * Test : Demande toutes les clés et prend la première
              */
             //array_filter($lesMois);
+            var_dump($lesMois);
             if (empty($lesMois)) {
                 ajouterErreur("Pas de fiche frais a valider !");
                 include("vues/v_erreurs.php");
