@@ -23,7 +23,7 @@
         <!---------------------------------------------- AFFICHAGE COMPTABLE ---------------------------------------------->
         <?php if ($_SESSION['type'] == "comptable"): ?>
         <li class="smenu">
-            <a href="index.php?uc=fraisAValider&action=selectionnerMoisAValider" title="Consultation de mes fiches de frais">Mes fiches de frais</a>
+            <a href="index.php?uc=fraisAValider&action=selectionnerMoisAValider" title="Consultation de mes fiches de frais">Fiches de frais à valider</a>
         </li><br/>
         <?php endif; ?>
         
