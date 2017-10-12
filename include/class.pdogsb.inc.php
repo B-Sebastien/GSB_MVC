@@ -68,21 +68,6 @@ class PdoGsb {
     }
 
     /**
-     * Retourne les informations d'un comptable
-
-     * @param $login 
-     * @param $mdp
-     * @return l'id, le nom et le prénom sous la forme d'un tableau associatif 
-     */
-    public function getInfosComptable($login, $mdp) {
-        $req = "select comptable.id as id, comptable.nom as nom, comptable.prenom as prenom from comptable 
-		where comptable.login='$login' and comptable.mdp='$mdp'";
-        $rs = PdoGsb::$monPdo->query($req);
-        $ligne = $rs->fetch();
-        return $ligne;
-    }
-
-    /**
      * Retourne sous forme d'un tableau associatif toutes les lignes de frais hors forfait
      * concernées par les deux arguments
 
@@ -297,30 +282,6 @@ class PdoGsb {
         }
         return $lesMois;
     }
-    
-    /**
-     * Fonction : Voir les mois à valider d'une fiche de frais
-     * @return type
-     */
-    public function getLesMoisAValider() {
-        $req = "select fichefrais.mois as mois from fichefrais where fichefrais.idEtat='CR'  
-		order by fichefrais.mois desc ";
-        $res = PdoGsb::$monPdo->query($req);
-        $lesMois = array();
-        $laLigne = $res->fetch();
-        while ($laLigne != null) {
-            $mois = $laLigne['mois'];
-            $numAnnee = substr($mois, 0, 4);
-            $numMois = substr($mois, 4, 2);
-            $lesMois["$mois"] = array(
-                "mois" => "$mois",
-                "numAnnee" => "$numAnnee",
-                "numMois" => "$numMois"
-            );
-            $laLigne = $res->fetch();
-        }
-        return $lesMois;
-    }
 
     /**
      * Retourne les informations d'une fiche de frais d'un visiteur pour un mois donné
@@ -361,6 +322,48 @@ class PdoGsb {
         $res = PdoGsb::$monPdo->query($req);
         $ligne = $res->fetchAll();
         return $ligne;
+    }
+   
+    
+    /* ************************************ COMPTABLE ************************************ */
+
+    /**
+     * Retourne les informations d'un comptable
+
+     * @param $login 
+     * @param $mdp
+     * @return l'id, le nom et le prénom sous la forme d'un tableau associatif 
+     */
+    public function getInfosComptable($login, $mdp) {
+        $req = "select comptable.id as id, comptable.nom as nom, comptable.prenom as prenom from comptable 
+		where comptable.login='$login' and comptable.mdp='$mdp'";
+        $rs = PdoGsb::$monPdo->query($req);
+        $ligne = $rs->fetch();
+        return $ligne;
+    }
+    
+    /**
+     * Fonction : Voir les mois à valider d'une fiche de frais
+     * @return type
+     */
+    public function getLesMoisAValider() {
+        $req = "select fichefrais.mois as mois from fichefrais where fichefrais.idEtat='CR'  
+		order by fichefrais.mois desc ";
+        $res = PdoGsb::$monPdo->query($req);
+        $lesMois = array();
+        $laLigne = $res->fetch();
+        while ($laLigne != null) {
+            $mois = $laLigne['mois'];
+            $numAnnee = substr($mois, 0, 4);
+            $numMois = substr($mois, 4, 2);
+            $lesMois["$mois"] = array(
+                "mois" => "$mois",
+                "numAnnee" => "$numAnnee",
+                "numMois" => "$numMois"
+            );
+            $laLigne = $res->fetch();
+        }
+        return $lesMois;
     }
     
     /**
