@@ -367,7 +367,7 @@ class PdoGsb {
     }
     
     /**
-     * Récupère les informations d'un visiteur des fiches à l'état CL
+     * Récupère les informations d'un visiteur des fiches à l'état CL par rapport au mois
      * Fonction : Voir les mois à valider d'une fiche de frais
      * @return type
      */

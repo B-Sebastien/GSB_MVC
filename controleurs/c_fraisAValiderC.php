@@ -49,15 +49,41 @@ switch ($action) {
     case 'selectionnerVisiteurAValider': {
             $leMois = $_REQUEST['lstMois'];
             $lesMois = $pdo->getLesMoisAValider(); //Appel fonction  
-           
-            
            // $_SESSION['idVisiteur']=$idVisiteur;
-            
             $lesVisiteurs = $pdo->getLesVisiteursAValider($leMois);
-            
             include("vues/v_listMoisAValider.php");
             include("vues/v_afficheVisiteur.php");
             break;  
         }
+    
+    case 'voirFraisVisiteur': { //Modification en fonction
+            $leMois = $_REQUEST['lstMois'];
+            $lesMois = $pdo->getLesMoisAValider();
+            include("vues/v_listMoisAValider.php");
+            
+            $lesVisiteurs = $pdo->getLesVisiteursAValider($leMois);
+            include("vues/v_afficheVisiteur.php");
+            
+
+            
+            $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois);
+            $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $leMois);
+            $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur, $leMois);
+            
+            $numAnnee = substr($leMois, 0, 4);
+            $numMois = substr($leMois, 4, 2);
+            
+            $libEtat = $lesInfosFicheFrais['libEtat'];
+            $montantValide = $lesInfosFicheFrais['montantValide'];
+            $nbJustificatifs = $lesInfosFicheFrais['nbJustificatifs'];
+            $dateModif = $lesInfosFicheFrais['dateModif'];
+            $dateModif = dateAnglaisVersFrancais($dateModif);
+            
+            
+            
+            include("vues/v_visiteurFrais.php");
+            
+    }
+
 }
 ?> 
