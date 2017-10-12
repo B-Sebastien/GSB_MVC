@@ -1,4 +1,5 @@
 <?php
+/********************************************** COMPTABLE **********************************************/
 include("vues/v_sommaire.php");
 $action = $_REQUEST['action'];
 $idVisiteur = $_SESSION['idVisiteur'];
@@ -23,7 +24,7 @@ switch ($action) {
             }
             break;
         }
-    case 'fraisAValider': { 
+    case 'fraisAValider': {
             $leMois = $_REQUEST['lstMois'];
             $lesMois = $pdo->getLesMoisAValider(); //Appel fonction
             $moisASelectionner = $leMois;
@@ -31,10 +32,10 @@ switch ($action) {
             $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($valeur, $leMois);
             $lesFraisForfait = $pdo->getLesFraisForfait($valeur, $leMois);
             $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($valeur, $leMois);
-            
+
             $numAnnee = substr($leMois, 0, 4); /* Modifie le formatage de l'année */
             $numMois = substr($leMois, 4, 2); /* Modifie le formatage du mois */
-            
+
             $libEtat = $lesInfosFicheFrais['libEtat'];
             $montantValide = $lesInfosFicheFrais['montantValide'];
             $nbJustificatifs = $lesInfosFicheFrais['nbJustificatifs'];
@@ -43,6 +44,28 @@ switch ($action) {
 
             include("vues/v_listMoisAValider.php");
             break;
+        }
+    case 'visiteurFraisAValider': {
+            $leVisiteur = $_REQUEST['lstVisiteurs'];
+            $lesVisiteurs = $pdo->getLesVisiteursAValider(); //Appel fonction
+            $visiteurASelectionner = $leVisiteur;
+
+            $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($valeur, $leMois);
+            $lesFraisForfait = $pdo->getLesFraisForfait($valeur, $leMois);
+            $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($valeur, $leMois);
+
+            $numAnnee = substr($leMois, 0, 4); /* Modifie le formatage de l'année */
+            $numMois = substr($leMois, 4, 2); /* Modifie le formatage du mois */
+
+            $libEtat = $lesInfosFicheFrais['libEtat'];
+            $montantValide = $lesInfosFicheFrais['montantValide'];
+            $nbJustificatifs = $lesInfosFicheFrais['nbJustificatifs'];
+            $dateModif = $lesInfosFicheFrais['dateModif'];
+            $dateModif = dateAnglaisVersFrancais($dateModif);
+            
+            include("vues/v_listMoisAValider.php");
+            include("vues/v_afficheVisiteur.php");
+            break;  
         }
 }
 ?>
