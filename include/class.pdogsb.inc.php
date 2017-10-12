@@ -351,5 +351,36 @@ class PdoGsb {
         PdoGsb::$monPdo->exec($req);
     }
 
+    
+    /**
+     * @return un tableau avec les fiche frais a valider
+     */
+    public function getLesFicheFraisAValider($mois) {
+        $req = "SELECT `idVisiteur`, visiteur.nom, visiteur.prenom FROM `fichefrais` INNER JOIN visiteur 
+                        WHERE `idEtat`= 'CR' AND `mois`= '$mois' AND fichefrais.`idVisiteur` = visiteur.`id`";
+        $res = PdoGsb::$monPdo->query($req);
+        $ligne = $res->fetchAll();
+        return $ligne;
+    }
+    
+    /**
+     * Fonction : Voir les mois à valider d'une fiche de frais
+     * @return type
+     */
+    public function getLesVisiteursAValider() {
+        $req = "SELECT idVisiteur, visiteur.nom, visiteur.prenom FROM fichefrais INNER JOIN visiteur WHERE idEtat= 'CR' AND fichefrais.mois AND fichefrais.idVisiteur = visiteur.id ";
+        $res = PdoGsb::$monPdo->query($req);
+        $lesVisiteurs = array();
+        $laLigne = $res->fetch();
+        while ($laLigne != null) {
+            $visiteur = $laLigne['visiteur'];
+            $lesVisiteurs["$visiteur"] = array(
+                "nom" => "$nom",
+                "prenom" => "$prenom",
+            );
+            $laLigne = $res->fetch();
+        }
+        return $lesVisiteurs;
+    }
 }
 ?>
