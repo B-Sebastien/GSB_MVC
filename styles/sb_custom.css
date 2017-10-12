@@ -80,16 +80,12 @@ form {
 
 .piedForm {
     border: none;
-width: 45%;
+ width: 80%;
 text-align: center;
 }
 
 #txtLibelleHF, #txtDateHF, #txtMontantHF {
     width: 60%;
-}
-
-#contenu h3 {
-    width: 205px;
 }
 
 label {
