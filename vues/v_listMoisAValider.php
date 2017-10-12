@@ -1,7 +1,7 @@
 ﻿ <div id="contenu">
     <h2>Mois de frais a valider</h2>
     <h3>Mois à sélectionner : </h3>
-    <form action="index.php?uc=fraisAValider&action=visiteurFraisAValider" method="post">
+    <form action="index.php?uc=fraisAValider&action=selectionnerVisiteurAValider" method="post">
         <div class="corpsForm">
             <p>
                 <label for="lstMois" accesskey="n">Mois : </label>
@@ -27,6 +27,7 @@
         </div>
         <div class="piedForm">
             <p>
+                <input type="hidden" value="lesMois"/>
                 <input id="ok" type="submit" value="Valider" size="20" />
                 <input id="annuler" type="reset" value="Effacer" size="20" />
             </p> 

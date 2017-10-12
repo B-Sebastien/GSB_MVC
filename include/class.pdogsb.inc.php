@@ -383,7 +383,6 @@ class PdoGsb {
             );
             $laLigne = $res->fetch();
         }
-        return $lesVisiteurs;
     }
 }
 ?>

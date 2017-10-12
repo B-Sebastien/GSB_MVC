@@ -45,19 +45,13 @@ switch ($action) {
             include("vues/v_listMoisAValider.php");
             break;
         }
-    case 'visiteurFraisAValider': {
+    case 'selectionnerVisiteurAValider': {
             $leVisiteur = $_REQUEST['lstVisiteurs'];
-            $lesVisiteurs = $pdo->getLesVisiteursAValider(); //Appel fonction
-            $lesMois = $pdo->getLesMoisAValider();
+            $lesVisiteurs = $pdo->getLesVisiteursAValider();
             $visiteurASelectionner = $leVisiteur;
-
-            $lesFraisForfait = $pdo->getLesFraisForfait($valeur, $leVisiteur);
-
-            $numAnnee = substr($leMois, 0, 4); /* Modifie le formatage de l'année */
-            $numMois = substr($leMois, 4, 2); /* Modifie le formatage du mois */
             
             include("vues/v_listMoisAValider.php");
-            include("vues/v_afficheVisiteur.php");
+            include("vues/v_afficheFraisVisiteur.php");
             break;  
         }
 }
