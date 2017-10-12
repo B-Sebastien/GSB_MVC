@@ -3,9 +3,9 @@ require_once("include/fct.inc.php");
 require_once ("include/class.pdogsb.inc.php");
 include("vues/v_entete.php") ;
 session_start();
-$pdo = PdoGsb::getPdoGsb();
-$estConnecte = estConnecte();
-if(!isset($_REQUEST['uc']) || !$estConnecte){
+$pdo = PdoGsb::getPdoGsb(); /* appel le constructeur */
+$estConnecte = estConnecte(); /* Renvoie vrai si un visiteur est connecté */
+if (!isset($_REQUEST['uc'])/* uc viens de vues/v_connecion */ || !$estConnecte) {
      $_REQUEST['uc'] = 'connexion';
 }
 
@@ -27,7 +27,7 @@ switch($uc){
 		include("controleurs/c_etatFrais.php");break; 
 	}
         case 'fraisAValider' :{
-		include("controleurs/c_fraisAValider.php");break; 
+		include("controleurs/c_fraisAValiderC.php");break; 
 	}
 }
 include("vues/v_pied.php") ;
