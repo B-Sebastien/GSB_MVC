@@ -347,7 +347,7 @@ class PdoGsb {
      * @return type
      */
     public function getLesMoisAValider() {
-        $req = "select fichefrais.mois as mois from fichefrais where fichefrais.idEtat='CR'  
+        $req = "select fichefrais.mois as mois from fichefrais where fichefrais.idEtat='CL'  
 		order by fichefrais.mois desc ";
         $res = PdoGsb::$monPdo->query($req);
         $lesMois = array();
@@ -367,22 +367,16 @@ class PdoGsb {
     }
     
     /**
+     * Récupère les informations d'un visiteur des fiches à l'état CL
      * Fonction : Voir les mois à valider d'une fiche de frais
      * @return type
      */
-    public function getLesVisiteursAValider() {
-        $req = "SELECT idVisiteur, visiteur.nom, visiteur.prenom FROM fichefrais INNER JOIN visiteur WHERE idEtat= 'CR' AND fichefrais.mois AND fichefrais.idVisiteur = visiteur.id ";
+    public function getLesVisiteursAValider($mois) {
+        $req = "SELECT idVisiteur, visiteur.nom, visiteur.prenom FROM fichefrais INNER JOIN visiteur ON fichefrais.idVisiteur = visiteur.id WHERE idEtat= 'CL' AND fichefrais.mois = '$mois' ";
         $res = PdoGsb::$monPdo->query($req);
-        $lesVisiteurs = array();
-        $laLigne = $res->fetch();
-        while ($laLigne != null) {
-            $visiteur = $laLigne['visiteur'];
-            $lesVisiteurs["$visiteur"] = array(
-                "nom" => "$nom",
-                "prenom" => "$prenom",
-            );
-            $laLigne = $res->fetch();
-        }
+        $laLigne = $res->fetchAll();
+        
+        return $laLigne;
     }
 }
 ?>

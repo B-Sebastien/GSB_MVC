@@ -45,14 +45,19 @@ switch ($action) {
             include("vues/v_listMoisAValider.php");
             break;
         }
+        
     case 'selectionnerVisiteurAValider': {
-            $leVisiteur = $_REQUEST['lstVisiteurs'];
-            $lesVisiteurs = $pdo->getLesVisiteursAValider();
-            $visiteurASelectionner = $leVisiteur;
+            $leMois = $_REQUEST['lstMois'];
+            $lesMois = $pdo->getLesMoisAValider(); //Appel fonction  
+           
+            
+           // $_SESSION['idVisiteur']=$idVisiteur;
+            
+            $lesVisiteurs = $pdo->getLesVisiteursAValider($leMois);
             
             include("vues/v_listMoisAValider.php");
-            include("vues/v_afficheFraisVisiteur.php");
+            include("vues/v_afficheVisiteur.php");
             break;  
         }
 }
-?>
+?> 
