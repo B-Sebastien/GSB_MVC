@@ -14,7 +14,7 @@ include("vues/v_sommaire.php");
             $moisASelectionner = $lesCles[0];
             include("vues/v_listeMois.php");
             break;
-        }
+        } 
         
         case 'voirEtatFrais': {
             $leMois = $_REQUEST['lstMois'];
