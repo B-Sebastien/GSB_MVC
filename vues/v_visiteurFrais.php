@@ -1,4 +1,4 @@
-<div class="encadre">
+
     <p>
         Etat : <?php echo $libEtat ?> depuis le <?php echo $dateModif ?> <br> 
         Montant validé : <?php echo $montantValide ?>         
@@ -50,4 +50,3 @@
         }
         ?>
     </table>
-</div> 

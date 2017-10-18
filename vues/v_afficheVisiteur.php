@@ -1,7 +1,7 @@
 <?php //var_dump($lesVisiteurs)?>
     <h2>Fiche de frais a valider</h2>
     <h3>Visiteur à sélectionner : </h3>
-    <form action="index.php?uc=fraisAValider&action=selectionnerVisiteurAValider" method="post">
+    <form action="index.php?uc=fraisAValider&action=selectionnerVisiteurAValider&action=voirFraisAValider" method="post">
         <div class="corpsForm">
             <p>
                 <label for="lstVisiteurs" accesskey="n">Visiteur : </label>
