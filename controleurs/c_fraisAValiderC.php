@@ -6,6 +6,9 @@ $action = $_REQUEST['action'];
 $idVisiteur = $_SESSION['idVisiteur'];
 
 switch ($action) {
+    /**
+     * Affichage des mois qui sont à valider
+     */
     case 'selectionnerMoisAValider': {
             $lesMois = $pdo->getLesMoisAValider();
             /**
@@ -25,53 +28,26 @@ switch ($action) {
             }
             break;
         }
-    case 'fraisAValider': {
-            $leMois = $_REQUEST['lstMois'];
-            $lesMois = $pdo->getLesMoisAValider(); //Appel fonction
-            $moisASelectionner = $leMois;
 
-            $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($valeur, $leMois);
-            $lesFraisForfait = $pdo->getLesFraisForfait($valeur, $leMois);
-            $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($valeur, $leMois);
-
-            $numAnnee = substr($leMois, 0, 4); /* Modifie le formatage de l'année */
-            $numMois = substr($leMois, 4, 2); /* Modifie le formatage du mois */
-
-            $libEtat = $lesInfosFicheFrais['libEtat'];
-            $montantValide = $lesInfosFicheFrais['montantValide'];
-            $nbJustificatifs = $lesInfosFicheFrais['nbJustificatifs'];
-            $dateModif = $lesInfosFicheFrais['dateModif'];
-            $dateModif = dateAnglaisVersFrancais($dateModif);
-
-            include("vues/v_listMoisAValider.php");
-            break;
-        }
-
+    /**
+     * Affichage des visiteurs en rapport avec le mois sélectionner
+     */    
     case 'selectionnerVisiteurAValider': {
-            $leMois = $_REQUEST['lstMois'];
-            $lesMois = $pdo->getLesMoisAValider(); //Appel fonction  
-            $_SESSION['idVisiteur'] = $idVisiteur;
-            $lesVisiteurs = $pdo->getLesVisiteursAValider($leMois);
-            include("vues/v_listMoisAValider.php");
-            include("vues/v_afficheVisiteur.php");
-            break;
-        }
-
-    case 'voirFraisVisiteur': { //Modification en fonction
             $leMois = $_REQUEST['lstMois'];
             $lesMois = $pdo->getLesMoisAValider();
             include("vues/v_listMoisAValider.php");
 
-            $lesCles = array_keys($lesMois);
-            $moisASelectionner = $leMois;
+            $lesVisiteurs = $pdo->getLesVisiteursAValider($leMois);
+            include("vues/v_afficheVisiteur.php");
             
             $numAnnee = substr($leMois, 0, 4); /* Modifie le formatage de l'année */
             $numMois = substr($leMois, 4, 2); /* Modifie le formatage du mois */
-            $lesVisiteurs = $pdo->getLesVisiteursAValider($leMois);
-            include("vues/v_afficheVisiteur.php");
             break;
         }
-
+        
+    /**
+     * Affichage de la fiche de frais d'un visiteur
+     */
     case 'voirFraisAValider': {
             $leMois = $_REQUEST['lstMois'];
             $lesMois = $pdo->getLesMoisAValider();
