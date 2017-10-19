@@ -73,10 +73,11 @@ switch ($action) {
             break;
         }
         
-    case 'reporterFrais': {
+    case 'supprimerFrais': {
             $idFrais = $_REQUEST['idFrais'];
-            $pdo->reporterFraisHorsForfait($idFrais);
+            $pdo->supprimerFraisHorsForfait($idFrais);
             break;
+            header("Location:vues/v_visiteurFrais.php");
         }
 }
 ?> 

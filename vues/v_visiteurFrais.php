@@ -16,6 +16,8 @@
                 $libelle = $unFraisHorsForfait['libelle'];
                 $date = $unFraisHorsForfait['date'];
                 $montant = $unFraisHorsForfait['montant'];
+                $idFrais = $unFraisHorsForfait['id'];
+                
                 ?>		
                 <tr>
                     <td> <?php echo $date ?></td>
