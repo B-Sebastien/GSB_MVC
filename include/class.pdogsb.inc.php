@@ -248,16 +248,6 @@ class PdoGsb {
     }
 
     /**
-     * Supprime le frais hors forfait dont l'id est passé en argument
-
-     * @param $idFrais 
-     */
-    public function supprimerFraisHorsForfait($idFrais) {
-        $req = "delete from lignefraishorsforfait where lignefraishorsforfait.id =$idFrais ";
-        PdoGsb::$monPdo->exec($req);
-    }
-
-    /**
      * Retourne les mois pour lesquel un visiteur a une fiche de frais
 
      * @param $idVisiteur 
@@ -377,6 +367,16 @@ class PdoGsb {
         $laLigne = $res->fetchAll();
         
         return $laLigne;
+    }
+    
+    /**
+     * Supprime le frais hors forfait dont l'id est passé en argument
+
+     * @param $idFrais 
+     */
+    public function supprimerFraisHorsForfait($idFrais) {
+        $req = "delete from lignefraishorsforfait where lignefraishorsforfait.id =$idFrais ";
+        PdoGsb::$monPdo->exec($req);
     }
 }
 ?>

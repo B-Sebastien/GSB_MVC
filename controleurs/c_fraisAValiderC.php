@@ -31,7 +31,7 @@ switch ($action) {
 
     /**
      * Affichage des visiteurs en rapport avec le mois sélectionner
-     */    
+     */
     case 'selectionnerVisiteurAValider': {
             $leMois = $_REQUEST['lstMois'];
             $lesMois = $pdo->getLesMoisAValider();
@@ -39,37 +39,43 @@ switch ($action) {
 
             $lesVisiteurs = $pdo->getLesVisiteursAValider($leMois);
             include("vues/v_afficheVisiteur.php");
-            
+
             $numAnnee = substr($leMois, 0, 4); /* Modifie le formatage de l'année */
             $numMois = substr($leMois, 4, 2); /* Modifie le formatage du mois */
             break;
         }
-        
+
     /**
      * Affichage de la fiche de frais d'un visiteur
      */
     case 'voirFraisAValider': {
-            $leMois = $_REQUEST['lstMois'];
+            $leMois = $_REQUEST['hdMois'];
             $lesMois = $pdo->getLesMoisAValider();
             include("vues/v_listMoisAValider.php");
-            
+
             $lesVisiteurs = $pdo->getLesVisiteursAValider($leMois);
             include("vues/v_afficheVisiteur.php");
-            
+
             $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois);
             $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $leMois);
             $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur, $leMois);
-            
+
             $numAnnee = substr($leMois, 0, 4);
             $numMois = substr($leMois, 4, 2);
-            
+
             $libEtat = $lesInfosFicheFrais['libEtat'];
             $montantValide = $lesInfosFicheFrais['montantValide'];
             $nbJustificatifs = $lesInfosFicheFrais['nbJustificatifs'];
             $dateModif = $lesInfosFicheFrais['dateModif'];
             $dateModif = dateAnglaisVersFrancais($dateModif);
-    
+
             include("vues/v_visiteurFrais.php");
+            break;
+        }
+        
+    case 'reporterFrais': {
+            $idFrais = $_REQUEST['idFrais'];
+            $pdo->reporterFraisHorsForfait($idFrais);
             break;
         }
 }
