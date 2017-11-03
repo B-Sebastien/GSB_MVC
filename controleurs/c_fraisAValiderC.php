@@ -73,10 +73,26 @@ switch ($action) {
             break;
         }
         
+//    case 'supprimerFrais': {
+//            $idFrais = $_REQUEST['idFrais'];
+//            $pdo->supprimerFraisHorsForfait($idFrais);
+//            break;
+//        }
+        
     case 'reporterFrais': {
             $idFrais = $_REQUEST['idFrais'];
             $pdo->reporterFraisHorsForfait($idFrais);
             break;
         }
+    case 'refuserFrais': {
+            $idFrais = $_REQUEST['idFrais'];
+            $pdo->refuserFraisHorsForfait($idFrais);
+            break;
+        }
+    case 'validerFraisHorsForfait': {
+            $idFrais = $_REQUEST['idFrais'];
+            $pdo->validerFraisHorsForfait($idFrais);
+            break;
+        } 
 }
 ?> 
