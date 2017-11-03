@@ -84,15 +84,26 @@ switch ($action) {
             $pdo->reporterFraisHorsForfait($idFrais);
             break;
         }
+        
     case 'refuserFrais': {
             $idFrais = $_REQUEST['idFrais'];
             $pdo->refuserFraisHorsForfait($idFrais);
             break;
         }
+        
     case 'validerFraisHorsForfait': {
             $idFrais = $_REQUEST['idFrais'];
             $pdo->validerFraisHorsForfait($idFrais);
             break;
         } 
+        
+    /**
+     * Récupération de toutes les fiches de frais à l'état "VA"
+     */
+    case 'suiviPaiement': {
+            $listeFichesFrais = $pdo->getFicheFraisSuivre();
+            include("vues/v_suiviFiche.php");
+            break;
+        }    
 }
 ?> 
