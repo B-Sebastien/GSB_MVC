@@ -378,5 +378,50 @@ class PdoGsb {
         $req = "delete from lignefraishorsforfait where lignefraishorsforfait.id =$idFrais ";
         PdoGsb::$monPdo->exec($req);
     }
+    
+    /* Voir les frais hors forfait qui sont refusés */
+
+    public function voirFraisRefuse($idFrais) {
+        $req = "SELECT situation FROM lignefraishorsforfait WHERE lignefraishorsforfait.id =$idFrais";
+        $res = PdoGsb::$monPdo->query($req);
+        $resu = $res->fetchAll();
+        return $resu;
+    }
+    
+    /* Refuse le frais hors forfait dont l'id est passé en argument */
+    
+    public function refuserFraisHorsForfait($idFrais) {
+        $req = "UPDATE lignefraishorsforfait set situation = 'REF' where lignefraishorsforfait.id =$idFrais ";
+        PdoGsb::$monPdo->exec($req);
+    }
+    
+    /* Valider le frais hors forfait dont l'id est passé en argument */
+
+    public function validerFraisHorsForfait($idFrais) {
+        $req = "UPDATE lignefraishorsforfait set situation = 'VAL' where lignefraishorsforfait.id =$idFrais ";
+        PdoGsb::$monPdo->exec($req);
+    }
+    
+    /* Reporte le frais hors forfait dont l'id est passé en argument */
+    
+    public function reporterFraisHorsForfait($idFrais) {
+        $req = "select mois From lignefraishorsforfait where id =$idFrais";
+        $res = PdoGsb::$monPdo->query($req);
+        $laLigne = $res->fetch();
+        $annee = $laLigne[0];
+        $mois = substr("$annee", 4);
+        $annee = substr("$annee", 0, -2);
+        
+        if ($mois < 12) {
+            $mois = $mois + 1;
+        } else {
+            $mois = 01;
+            $annee = $annee + 1;
+        }
+        $date = $annee . $mois;
+        echo $date;
+
+        // faire une requete update qui va modier la date de plusieurs element de la base par date
+    }
 }
 ?>
