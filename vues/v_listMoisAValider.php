@@ -31,4 +31,4 @@
                 <input id="annuler" type="reset" value="Effacer" size="20" />
             </p> 
         </div> 
-    </form> 
+    </form>

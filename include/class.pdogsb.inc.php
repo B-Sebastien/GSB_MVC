@@ -448,18 +448,40 @@ class PdoGsb {
     }
 
     /**
-     * Retourne la liste des fiches qui sont vaidées
+     * Retourne la liste des fiches de frais qui sont à valider
      * @return type
      */
     public function getFicheFraisSuivre() {
         $req = PdoGsb::$monPdo->prepare("SELECT fichefrais.idVisiteur AS id, fichefrais.mois AS mois, fichefrais.montantValide AS montant, fichefrais.idEtat, visiteur.nom AS nom, visiteur.prenom AS prenom
                                             FROM fichefrais JOIN visiteur ON fichefrais.idVisiteur = visiteur.id
                                             WHERE idEtat = 'VA' 
-                                            ORDER BY mois desc");
+                                            ORDER BY mois DESC");
         $req->execute();
         $fiche = $req->fetchAll();
         return $fiche;
     }
 
+    /**
+     * Retourne le nom le prenom du visiteur en fonction de sont identifiant
+     * @param type $pid
+     * @return type
+     */
+    public function getNomPrenomVisiteur($pid) {
+        $req = "select visiteur.nom as nom, visiteur.prenom as prenom from visiteur where id ='$pid'";
+        $res = PdoGsb::$monPdo->query($req);
+        $res = $res->fetch();
+        return $res;
+    }
+    
+     /**
+     * Retourne tout les nom,prenom et l'id dans la table visiteur
+     * @return type
+     */
+    public function getNomPrenomIdVisiteur() {
+        $req = "select visiteur.nom as nom, visiteur.prenom as prenom, visiteur.id as id from visiteur";
+        $res = PdoGsb::$monPdo->query($req);
+        //$nom = $rs->fetch();
+        return $res;
+    }
 }
 ?>

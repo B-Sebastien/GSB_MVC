@@ -72,31 +72,31 @@ switch ($action) {
             include("vues/v_visiteurFrais.php");
             break;
         }
-        
+
 //    case 'supprimerFrais': {
 //            $idFrais = $_REQUEST['idFrais'];
 //            $pdo->supprimerFraisHorsForfait($idFrais);
 //            break;
 //        }
-        
+
     case 'reporterFrais': {
             $idFrais = $_REQUEST['idFrais'];
             $pdo->reporterFraisHorsForfait($idFrais);
             break;
         }
-        
+
     case 'refuserFrais': {
             $idFrais = $_REQUEST['idFrais'];
             $pdo->refuserFraisHorsForfait($idFrais);
             break;
         }
-        
+
     case 'validerFraisHorsForfait': {
             $idFrais = $_REQUEST['idFrais'];
             $pdo->validerFraisHorsForfait($idFrais);
             break;
-        } 
-        
+        }
+
     /**
      * Récupération de toutes les fiches de frais à l'état "VA"
      */
@@ -104,6 +104,35 @@ switch ($action) {
             $listeFichesFrais = $pdo->getFicheFraisSuivre();
             include("vues/v_suiviFiche.php");
             break;
-        }    
-}
+        }
+
+    case 'valideChoixFiche': {
+            $listeFichesFrais = $pdo->getFicheFraisSuivre();
+
+            $dateValide = substr($_REQUEST['lstVisiteur'], 0, 6);
+            $visiteur = substr($_REQUEST['lstVisiteur'], 6, strlen($_REQUEST['lstVisiteur']));
+
+            // On récupère toutes les infos de la fiche du visiteur pour le mois
+            $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($visiteur, $dateValide);
+        
+            /* retourne les nom des visiteurs */
+            $listeVisiteur = $pdo->getNomPrenomIdVisiteur();
+            $nomPrenomVisiteur = $pdo->getNomPrenomVisiteur($visiteur);
+            /**/
+            $nbJustificatifs = $pdo->getNbjustificatifs($visiteur, $dateValide);
+            $lesFraisForfait = $pdo->getLesFraisForfait($visiteur, $dateValide);
+            /**/
+            $montantValide = $lesInfosFicheFrais['montantValide'];
+            include("vues/v_suiviFiche.php");
+            // Vérification si aucune fiche n'est retournée
+            if (empty($lesInfosFicheFrais)) {
+                ajouterErreur("Fiche inexistante");
+                include("vues/v_erreurs.php");
+                ;
+            } else {
+                include ("vues/v_suivreFrais.php");
+            }
+            break;
+        }
+    }
 ?> 
