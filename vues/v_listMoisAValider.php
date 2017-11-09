@@ -11,10 +11,10 @@
                         $mois = $unMois['mois'];
                         $numAnnee = $unMois['numAnnee'];
                         $numMois = $unMois['numMois'];
-                        if ($mois == $moisASelectionner) {
+
+                        if (isset($lstMois) && $mois == $lstMois) {
                             ?>
-                            <option  selected value="<?php echo $mois ?>"><?php echo $numMois . "/" . $numAnnee ?> </option> 
-                            <?php
+                            <option selected value="<?php echo $mois ?>"><?php echo $numMois . "/" . $numAnnee ?> </option> <?php 
                         } else {
                             ?>
                             <option value="<?php echo $mois ?>"><?php echo $numMois . "/" . $numAnnee ?> </option>

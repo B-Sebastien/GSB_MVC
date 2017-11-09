@@ -16,14 +16,13 @@ switch ($action) {
              * Array : Nettoi le tableau et supprime les lignes qui ont des valeurs null, vides ou false
              * Test : Demande toutes les clés et prend la première
              */
-            //array_filter($lesMois);
-            //var_dump($lesMois);
+            
             if (empty($lesMois)) { /* Permet d'afficher un message d'erreurs si aucun fiche n'est à valider */
                 ajouterErreur("Pas de fiche frais a valider !");
                 include("vues/v_erreurs.php");
             } else {
                 $lesCles = array_keys($lesMois);
-                $moisASelectionner = $lesCles[0];
+                $lstMois = $lesCles[0];
                 include("vues/v_listMoisAValider.php");
             }
             break;
@@ -38,7 +37,7 @@ switch ($action) {
             include("vues/v_listMoisAValider.php");
 
             $lesVisiteurs = $pdo->getLesVisiteursAValider($leMois);
-            include("vues/v_afficheVisiteur.php");
+            include("vues/v_selectionnerVisiteur.php");
 
             $numAnnee = substr($leMois, 0, 4); /* Modifie le formatage de l'année */
             $numMois = substr($leMois, 4, 2); /* Modifie le formatage du mois */
@@ -50,15 +49,17 @@ switch ($action) {
      */
     case 'voirFraisAValider': {
             $leMois = $_REQUEST['hdMois'];
+            $lstVisiteur = $_REQUEST['lstVisiteurs'];
+            
             $lesMois = $pdo->getLesMoisAValider();
             include("vues/v_listMoisAValider.php");
-
+            
             $lesVisiteurs = $pdo->getLesVisiteursAValider($leMois);
-            include("vues/v_afficheVisiteur.php");
+            include("vues/v_selectionnerVisiteur.php");
 
-            $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois);
-            $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $leMois);
-            $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur, $leMois);
+            $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($lstVisiteur, $leMois);
+            $lesFraisForfait = $pdo->getLesFraisForfait($lstVisiteur, $leMois);
+            $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($lstVisiteur, $leMois);
 
             $numAnnee = substr($leMois, 0, 4);
             $numMois = substr($leMois, 4, 2);
