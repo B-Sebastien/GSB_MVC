@@ -3,8 +3,7 @@ function creerPDFFiche($lesFraisHorsForfait, $lesFraisForfaits, $mois) {
     //Permet d'afficher les mois correctement
     $listeMois = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
     //Nom Prenom du visiteur
-    $nom = $_SESSION['nom'];
-    $prenom = $_SESSION['prenom'];
+   // $infos = $pdo->getNomPrenomVisiteur($visiteur);
     require dirname(__DIR__) . DIRECTORY_SEPARATOR . "fpdf" . DIRECTORY_SEPARATOR . "fpdf.php";
     //Création du PDF
     $pdf = new FPDF();
@@ -22,7 +21,7 @@ function creerPDFFiche($lesFraisHorsForfait, $lesFraisForfaits, $mois) {
     $pdf->Ln(60);
     //Fiche Visiteur
     $pdf->Cell(50, 10, "Visiteur", 0, 0, 'L');
-    $pdf->Cell(50, 10, utf8_decode(($nom . ' ' . $prenom)));
+    //$pdf->Cell(50, 10, utf8_decode(($infos['nom'] . ' ' . $infos["prenom"])));
     $pdf->Ln(10);
     $pdf->Cell(50, 10, "Mois", 0, 0, 'L');
     $pdf->Cell(50, 10, utf8_decode($listeMois[date('n', strtotime("01-" . substr($mois, 4, 2)) . '-' . substr($mois, 0, 4)) - 1] . ' ' . substr($mois, 0, 4)), 0, 0, 'C');
@@ -34,19 +33,19 @@ function creerPDFFiche($lesFraisHorsForfait, $lesFraisForfaits, $mois) {
     $pdf->Cell(45, 10, "Montant Unitaire", 1, 0, 'C');
     $pdf->Cell(45, 10, "Total", 1, 0, 'C');
     $pdf->Ln(10);
-    $totalFraisForfaits = 0;
+   /* $totalFraisForfaits = 0;
     //Génération de chacun des élements du tableau des frais forfaits
     foreach ($lesFraisForfaits as $unFraisForfait) {
         $pdf->SetFont('Arial', 'I', 10);
         $pdf->Cell(45, 10, utf8_decode($unFraisForfait['libelle']), 1, 0, 'C');
         $pdf->SetFont('Arial', '', 10);
         $pdf->Cell(45, 10, $unFraisForfait['quantite'], 1, 0, 'C');
-        $pdf->Cell(45, 10, $montant, 1, 0, 'C');
+        $pdf->Cell(45, 10, $unFraisForfait['montant'], 1, 0, 'C');
         $pdf->Cell(45, 10, ($unFraisForfait['quantite'] * $unFraisForfait['montant']), 1, 0, 'C');
         $pdf->Ln(10);
         $totalFraisForfaits+=$unFraisForfait['quantite'] * $unFraisForfait['montant'];
     }
-    $totalFraisHorsForfait = 0;
+    $totalFraisHorsForfait = 0; */
     $pdf->Ln(20);
     // Position en X avec 3 colonnes
     $pdf->SetFont('Arial', '', 12);
@@ -58,7 +57,7 @@ function creerPDFFiche($lesFraisHorsForfait, $lesFraisForfaits, $mois) {
     $pdf->Cell(60, 10, "Montant", 1, 0, 'C');
     $pdf->Ln(10);
     //Génération de chacun des éléments du tableau des autres frais (frais hors forfait)
-    foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
+/*    foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
         $pdf->SetFont('Arial', 'I', 10);
         $pdf->Cell(60, 10, $unFraisHorsForfait['date'], 1, 0, 'C');
         $pdf->SetFont('Arial', '', 10);
@@ -67,7 +66,7 @@ function creerPDFFiche($lesFraisHorsForfait, $lesFraisForfaits, $mois) {
         $pdf->Ln(10);
         $totalFraisHorsForfait+=$unFraisHorsForfait['montant'];
     }
-    $total = $totalFraisForfaits + $totalFraisHorsForfait;
+    $total = $totalFraisForfaits + $totalFraisHorsForfait; */
     $pdf->Ln(10);
     $pdf->Cell(50, 10, 'Total', 1, 0, 'C');
     $pdf->Cell(50, 10, $total, 1, 0, 'C');

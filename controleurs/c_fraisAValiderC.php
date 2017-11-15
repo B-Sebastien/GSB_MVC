@@ -141,6 +141,9 @@ switch ($action) {
         case 'generationPDF': {
         $dateValide = $_REQUEST['date'];
         $visiteur = $_REQUEST['id'];
+        
+        $infos = $pdo->getNomPrenomVisiteur($visiteur);
+            
         $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($visiteur, $dateValide);
         $lesFraisForfait= $pdo->getLesFraisForfait($visiteur, $dateValide);
         
