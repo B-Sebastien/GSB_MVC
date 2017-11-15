@@ -10,40 +10,90 @@
             <th class="libelle">Frais forfait</th>
             <th class='montant'>Quantite</th>
             <th class='montant'>Montant unitaire</th>
+            <th class='montant'>Total</th>
         </tr>
         
         <?php 
+        /**
+         * Génération des frais forfait d'un visiteur
+         */
+        $total = 0;
             foreach ($lesFraisForfait as $unFraisForfait) {
                 $quantite = $unFraisForfait['quantite'];
                 $libelle = $unFraisForfait['libelle'];
-                $idF = $unFraisForfait['idFrais'];
+                $idFrais = $unFraisForfait['idfrais'];
+                $totalUnit = ($quantite * $montant);
+                $total = $total + ($quantite * $montant);
                 ?>
         <tr>
             <td><?php echo $libelle; ?></td>
             <td><?php echo $quantite; ?></td>
             <td><?php echo $montant; ?></td>
+            <td><?php echo $totalUnit; ?></td>
         </tr> <?php
             }
         ?>
     </table>
-    
-<!--    <table class="listeLegere">
-        <caption>Hors Forfait</caption>
-        <tr>
-            <th class="libelle">Date</th>
-            <th class='montant'>Libellé</th>
-            <th class='montant'>Montant</th>
-            <th class='montant'>Situation</th>
-            <th class='montant'>Date opération</th>
-        </tr>
-    </table>
+    <br/>
+    <br/>
     
     <table class="listeLegere">
-        <caption>Hors Classification</caption>
+        <caption>Frais hors forfait</caption>
         <tr>
-            <th class="libelle">Nb justificatifs</th>
+            <th class="date">Date</th>
+            <th class="libelle">Libellé</th>
             <th class='montant'>Montant</th>
-            <th class='montant'>Situation</th>
-            <th class='montant'>Date opération</th>
+            <th class="montant">Total</th>
         </tr>
-    </table>-->
+        <?php
+        /**
+         * Génération des frais hors forfait d'un visiteur
+         */
+        foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
+            $idFraisHorsF = $unFraisHorsForfait['id'];
+            $date = $unFraisHorsForfait['date'];    
+            $libelle = $unFraisHorsForfait['libelle'];
+            $montant = $unFraisHorsForfait['montant'];
+            $total = $total + $montant;
+            ?>
+            <tr>
+                <td><?php echo $date; ?></td>
+                <td><?php echo $libelle; ?></td>
+                <td><?php echo $montant; ?></td>
+                <td><?php echo $total; ?></td>
+                <?php
+            }
+            ?>
+        </tr>
+    </table>
+    <br/>
+    <br/>
+    
+    <table class="listeLegere">
+        <caption>Etat de la fiche de frais</caption>
+        <tr>
+            <th>Etat</th>
+            <th>Montant validé</th>
+            <th>Justificatifs</th>
+            <th>PDF</th>
+        </tr>
+        <tr>
+            <td>
+                <?php
+                //Initialisation de l'état de la fiche à afficher
+                $etatFiche = $lesInfosFicheFrais['libEtat'];
+                echo $etatFiche;
+                ?>
+                <input type='hidden' name='etat_defaut' value='<?php echo $etatFiche; ?>' />
+            </td>
+            <td>
+                <?php echo $montantValide ?>
+            </td>
+            <td>
+                <?php echo $nbJustificatifs ?>
+            </td>
+            <td>
+                <a href="index.php?uc=fraisAValider&action=generationPDF&id=<?php echo $visiteur ?>&date=<?php echo $dateValide; ?>" target="_blank"><img id=supp src="images/pdf.png" alt="pdf" /></a>
+            </td>
+        </tr>
+    </table>

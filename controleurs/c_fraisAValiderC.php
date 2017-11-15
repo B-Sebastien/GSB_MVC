@@ -16,7 +16,6 @@ switch ($action) {
              * Array : Nettoi le tableau et supprime les lignes qui ont des valeurs null, vides ou false
              * Test : Demande toutes les clés et prend la première
              */
-            
             if (empty($lesMois)) { /* Permet d'afficher un message d'erreurs si aucun fiche n'est à valider */
                 ajouterErreur("Pas de fiche frais a valider !");
                 include("vues/v_erreurs.php");
@@ -32,7 +31,7 @@ switch ($action) {
      * Affichage des visiteurs en rapport avec le mois sélectionner
      */
     case 'selectionnerVisiteurAValider': {
-        // Récupère la liste de mois 
+            // Récupère la liste de mois 
             $leMois = $_REQUEST['lstMois'];
             $lesMois = $pdo->getLesMoisAValider();
             include("vues/v_listMoisAValider.php");
@@ -51,10 +50,10 @@ switch ($action) {
     case 'voirFraisAValider': {
             $leMois = $_REQUEST['hdMois'];
             $lstVisiteur = $_REQUEST['lstVisiteurs'];
-            
+
             $lesMois = $pdo->getLesMoisAValider();
             include("vues/v_listMoisAValider.php");
-            
+
             $lesVisiteurs = $pdo->getLesVisiteursAValider($leMois);
             include("vues/v_selectionnerVisiteur.php");
 
@@ -108,7 +107,7 @@ switch ($action) {
             break;
         }
 
-    case 'valideChoixFiche': {
+    case 'validerChoixFiche': {
             $listeFichesFrais = $pdo->getFicheFraisSuivre();
 
             $dateValide = substr($_REQUEST['lstVisiteur'], 0, 6);
@@ -116,13 +115,15 @@ switch ($action) {
 
             // On récupère toutes les infos de la fiche du visiteur pour le mois
             $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($visiteur, $dateValide);
-        
+
             /* retourne les nom des visiteurs */
             $listeVisiteur = $pdo->getNomPrenomIdVisiteur();
             $nomPrenomVisiteur = $pdo->getNomPrenomVisiteur($visiteur);
             /**/
             $nbJustificatifs = $pdo->getNbjustificatifs($visiteur, $dateValide);
             $lesFraisForfait = $pdo->getLesFraisForfait($visiteur, $dateValide);
+            $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($visiteur, $dateValide);
+
             /**/
             $montantValide = $lesInfosFicheFrais['montantValide'];
             include("vues/v_suiviFiche.php");
@@ -132,9 +133,20 @@ switch ($action) {
                 include("vues/v_erreurs.php");
                 ;
             } else {
-                include ("vues/v_suivreFrais.php");
+                include ("vues/v_suiviFrais.php");
             }
             break;
         }
+        
+        case 'generationPDF': {
+        $dateValide = $_REQUEST['date'];
+        $visiteur = $_REQUEST['id'];
+        $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($visiteur, $dateValide);
+        $lesFraisForfait= $pdo->getLesFraisForfait($visiteur, $dateValide);
+        
+    require "vues/v_generationPdf.php";
+    creerPDFFiche($lesFraisHorsForfait, $lesFraisForfait,$dateValide);
+    break;
     }
+}
 ?> 

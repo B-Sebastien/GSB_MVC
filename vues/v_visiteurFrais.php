@@ -61,7 +61,7 @@
             <?php
         }
 
-        header("location:vues/v_visiteurFrais.php");
+        //header("location:vues/v_visiteurFrais.php");
 
         ?>
     </table>
