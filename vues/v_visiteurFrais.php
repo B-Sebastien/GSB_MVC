@@ -55,10 +55,14 @@
                 <td><a href="index.php?uc=fraisAValider&action=refuserFrais&idFrais=<?php echo $idFrais ?>"onclick="return confirm('Voulez-vous vraiment refuser ce frais?');">Refuser ce frais</a></td>
                 <td><a href="index.php?uc=fraisAValider&action=reporterFrais&idFrais=<?php echo $idFrais ?>"onclick="return confirm('Voulez-vous vraiment reporter ce frais?');">Reporter ce frais</a></td>
                 <td><a href="index.php?uc=fraisAValider&action=validerFraisHorsForfait&idFrais=<?php echo $idFrais ?>"onclick="return confirm('Voulez-vous vraiment valider ce frais?');">Valider ce frais</a></td>
-
+                
+                
             </tr>
             <?php
         }
+
+        header("location:vues/v_visiteurFrais.php");
+
         ?>
     </table>
 </div>

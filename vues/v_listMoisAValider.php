@@ -12,6 +12,11 @@
                         $numAnnee = $unMois['numAnnee'];
                         $numMois = $unMois['numMois'];
 
+                        /**
+                         * Si la variable lstMois est null et que le mois est strictement égale à lstMois
+                         * Affiche la liste selected value pour sélectionner l'état initial
+                         * Affiche une liste par défaut
+                         */
                         if (isset($lstMois) && $mois == $lstMois) {
                             ?>
                             <option selected value="<?php echo $mois ?>"><?php echo $numMois . "/" . $numAnnee ?> </option> <?php 

@@ -13,9 +13,9 @@
                         $idVisiteur = $unVisiteur['idVisiteur'];
                         
                         /**
-                         * Si la variable visiteur est null et que l'id du visiteur est strictement égale à lstVisiteur
-                         * Affiche la liste selected value 
-                         * Affiche une liste basique
+                         * Si la variable lstVisiteur est null et que l'id du visiteur est strictement égale à lstVisiteur
+                         * Affiche la liste selected value pour sélectionner l'état initial
+                         * Affiche une liste par défaut
                          */
                         if (isset($lstVisiteur) && $idVisiteur == $lstVisiteur) { ?>
                             <option selected value="<?php echo $idVisiteur; ?>"> <?php echo $nom." ".$prenom; ?></option> <?php 

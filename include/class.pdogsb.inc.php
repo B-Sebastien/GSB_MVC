@@ -251,10 +251,10 @@ class PdoGsb {
     public function creeNouveauFraisHorsForfait($idVisiteur, $mois, $libelle, $date, $montant) {
         $dateFr = dateFrancaisVersAnglais($date);
         $req = "INSERT INTO lignefraishorsforfait 
-		VALUES('','$idVisiteur','$mois','$libelle','$dateFr','$montant')";
+		VALUES('$idVisiteur','$mois','$libelle','$dateFr','$montant')";
         PdoGsb::$monPdo->exec($req);
     }
-
+    
     /**
      * Retourne les mois pour lesquel un visiteur a une fiche de frais
 

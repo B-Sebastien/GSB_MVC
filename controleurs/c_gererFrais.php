@@ -33,13 +33,17 @@ include("vues/v_sommaire.php");
             $libelle = $_REQUEST['libelle'];
             $montant = $_REQUEST['montant'];
             valideInfosFrais($dateFrais,$libelle,$montant);
+            //var_dump($dateFrais, $libelle, $montant);
             if (nbErreurs() !=0){
                 include("vues/v_erreurs.php");
+                //var_dump($dateFrais, $libelle, $montant);
             }
             
             else {
+                //var_dump($dateFrais, $libelle, $montant);
                 $pdo->creeNouveauFraisHorsForfait($idVisiteur,$mois,$libelle,$dateFrais,$montant);
             }
+            //var_dump($dateFrais, $libelle, $montant);
             break;
 	}
         

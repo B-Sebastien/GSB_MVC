@@ -32,6 +32,7 @@ switch ($action) {
      * Affichage des visiteurs en rapport avec le mois sélectionner
      */
     case 'selectionnerVisiteurAValider': {
+        // Récupère la liste de mois 
             $leMois = $_REQUEST['lstMois'];
             $lesMois = $pdo->getLesMoisAValider();
             include("vues/v_listMoisAValider.php");
