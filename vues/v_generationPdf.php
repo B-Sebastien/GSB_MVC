@@ -20,10 +20,10 @@ function creerPDFFiche($lesFraisHorsForfait, $lesFraisForfaits, $mois) {
     $pdf->Ln(60);
     //Fiche Visiteur
     $pdf->Cell(50, 10, "Visiteur", 0, 0, 'L');
-    //$pdf->Cell(50, 10, utf8_decode(($infosVisiteur['nom'] . ' ' . $infosVisiteur["prenom"])));
+   // $pdf->Cell(50, 10, utf8_decode(($infosVisiteur['nom'] . ' ' . $infosVisiteur["prenom"])));
     $pdf->Ln(10);
     $pdf->Cell(50, 10, "Mois", 0, 0, 'L');
-    $pdf->Cell(50, 10, utf8_decode($listeMois[date('n', strtotime(substr($mois, 0, 4)) . substr($mois, 4, 2)) - 1] . ' ' . substr($mois, 0, 4)), 0, 0, 'C');
+    $pdf->Cell(50, 10, utf8_decode($listeMois[date('n', strtotime("01-" . substr($mois, 4, 2)) . '-' . substr($mois, 0, 4)) - 1] . ' ' . substr($mois, 0, 4)), 0, 0, 'C');
     $pdf->Ln(20);
     // Frais forfaitaires
     $pdf->SetFont('Arial', '', 12);
