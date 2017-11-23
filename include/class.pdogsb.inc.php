@@ -117,7 +117,7 @@ class PdoGsb {
      * @return l'id, le libelle et la quantité sous la forme d'un tableau associatif 
      */
     public function getLesFraisForfait($idVisiteur, $mois) {
-        $req = "SELECT fraisforfait.id AS idfrais, fraisforfait.libelle AS libelle, lignefraisforfait.quantite AS quantite
+        $req = "SELECT fraisforfait.id AS idfrais, fraisforfait.libelle AS libelle, lignefraisforfait.quantite AS quantite, fraisforfait.montant AS montant
                 FROM lignefraisforfait INNER JOIN fraisforfait 
 		ON fraisforfait.id = lignefraisforfait.idfraisforfait
 		WHERE lignefraisforfait.idvisiteur ='$idVisiteur' AND lignefraisforfait.mois='$mois' 
@@ -444,7 +444,6 @@ class PdoGsb {
         $date = $annee . $mois;
         echo $date;
 
-        // faire une requete update qui va modier la date de plusieurs element de la base par date
     }
 
     /**

@@ -17,11 +17,16 @@
                         //l'id de l'option est : mois + id
                         //ce format sera ensuite découpé par la suite.
                         //afin d'obtenir le mois et l'id séparément
-                        ?> 
-                        <option value="<?php echo $mois . $id; ?>"> 
-                            <?php echo "Fiche du visiteur: " . $nom . " " . $prenom . " | Mois: " . $mois . " | Montant " . $montant . "€"; ?> 
-                        </option>
-                        <?php
+                        if (isset($lstVisiteur) && $idVisiteur == $lstVisiteur) { ?>
+                            <option selected value="<?php echo $mois . $id; ?>"> 
+                                <?php echo "Fiche du visiteur: " . $nom . " " . $prenom . " | Mois: " . $mois . " | Montant " . $montant . "€"; ?> 
+                            </option> <?php 
+                        } else { ?>
+                            <option value="<?php echo $mois . $id; ?>"> 
+                                <?php echo "Fiche du visiteur: " . $nom . " " . $prenom . " | Mois: " . $mois . " | Montant " . $montant . "€"; ?> 
+                            </option>
+                        <?php 
+                        }
                     }
                     ?>
                 </select>

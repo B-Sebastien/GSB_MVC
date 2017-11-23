@@ -22,6 +22,7 @@
                 $quantite = $unFraisForfait['quantite'];
                 $libelle = $unFraisForfait['libelle'];
                 $idFrais = $unFraisForfait['idfrais'];
+                $montant = $unFraisForfait['montant'];
                 $totalUnit = ($quantite * $montant);
                 $total = $total + ($quantite * $montant);
                 ?>
